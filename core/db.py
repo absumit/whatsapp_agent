@@ -1,8 +1,4 @@
-"""Database-facing business logic.
 
-The original database module is not present in this workspace yet. Keep database
-access in this module so LangChain wrappers do not leak into the core layer.
-"""
 import os
 from dotenv import load_dotenv
 from pymongo import MongoClient

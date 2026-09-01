@@ -7,7 +7,6 @@ from core.schemas import order_item
 
 
 def resolve_price(item: order_item):
-    """Returns (price, error_message). Exactly one of the two is None."""
     if not db.cached_menu:
         return None, "Menu pricing is currently unavailable"
 

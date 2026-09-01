@@ -23,7 +23,7 @@ RAZORPAY_WEBHOOK_SECRET = os.getenv("RAZORPAY_WEBHOOK_SECRET")
 
 
 def process_message(message: str, phone_number: str, customer_name: str) -> None:
-    """Generate and send a reply after Twilio has received the webhook response."""
+   
     try:
         ai_reply = getmsg(message, phone_number, customer_name)
         send_whatsapp(to=phone_number, body=ai_reply)
@@ -42,7 +42,7 @@ def whatsapp_msg():
     if in_msg and ph_num:
         executor.submit(process_message, in_msg, ph_num, profile_name)
 
-    # Acknowledge the webhook immediately. The answer is sent asynchronously.
+    
     return str(MessagingResponse())
 
 
@@ -89,7 +89,7 @@ def razorpay_webhook():
     if status == "paid" and order.get("status") == "paid" and order.get("payment_confirmation_sent"):
         return jsonify({"status": "already processed"}), 200
 
-    # ---- NEW: we already cancelled this ourselves in generate_payment_link — stay silent ----
+    
     if status == "cancelled" and order.get("cancelled_reason") == "superseded_by_new_link":
         return jsonify({"status": "updated", "payment_status": status}), 200
     # -----------------------------------------------------------------------------------------
